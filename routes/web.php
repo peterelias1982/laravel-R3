@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
+use App\Http\Controllers\CarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,13 @@ Route::post('logged', function () {
 })->name('logged');
 
 Route::get('aya',[ExampleController::class,'show']);
+
+Route::get('test/{name}/{id}', function($name, $id){
+    return 'the text is ' . $name . ' and id is ' . $id ;
+})->where('name','[a-zA-Z0-9]+')->whereNumber('id');
+
+
+// Routes for the car table
+Route::get('createCar',[CarController::class,'create'])->name('createCar');
+Route::get('cars',[CarController::class,'index']);
+Route::post('storeCar',[CarController::class,'store'])->name('storeCar');
