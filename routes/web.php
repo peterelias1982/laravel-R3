@@ -36,5 +36,12 @@ Route::get('test/{name}/{id}', function($name, $id){
 
 // Routes for the car table
 Route::get('createCar',[CarController::class,'create'])->name('createCar');
-Route::get('cars',[CarController::class,'index']);
+Route::get('cars',[CarController::class,'index'])->name('cars');
+Route::get('updateCar/{id}',[CarController::class,'edit']);
+Route::get('showCar/{id}',[CarController::class,'show']);
+Route::get('deleteCar/{id}',[CarController::class,'destroy']);
+Route::get('trashed',[CarController::class,'trashed'])->name('trashed');
+Route::get('restoreCar/{id}',[CarController::class,'restore'])->name('restoreCar');
+Route::get('forceDelete/{id}',[CarController::class,'forceDelete'])->name('forceDelete');
+Route::put('update/{id}',[CarController::class,'update'])->name('update');
 Route::post('storeCar',[CarController::class,'store'])->name('storeCar');
