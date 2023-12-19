@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Car;
+use App\Traits\Common;
 
 class CarController extends Controller
 {
+    use Common;
     private $columns = ['title', 'description', 'published'];
 
     /**
@@ -42,11 +44,14 @@ class CarController extends Controller
         
         // $cars->save();
         // $data = $request->only($this->columns);
+        $messages = $this->messages();
         $data = $request->validate([
              'title'=>'required|string|max:50',
              'description'=> 'required|string',
-            ]);
-            
+             'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+            ], $messages);
+        $fileName = $this->uploadFile($request->image, 'assets/images');    
+        $data['image'] = $fileName;
         $data['published'] = isset($request->published);
         Car::create($data);
         return redirect('cars');
@@ -112,5 +117,16 @@ class CarController extends Controller
     {
         Car::where('id', $id)->restore();
         return redirect('cars');
+    }
+
+    public function messages(){
+        return [
+            'title.required'=>'عنوان السيارة مطلوب',
+            'title.string'=>'Should be string',
+            'description.required'=> 'should be text',
+            'image.required'=> 'Please be sure to select an image',
+            'image.mimes'=> 'Incorrect image type',
+            'image.max'=> 'Max file size exceeded',
+            ];
     }
 }

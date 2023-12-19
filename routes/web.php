@@ -29,9 +29,15 @@ Route::post('logged', function () {
 
 Route::get('aya',[ExampleController::class,'show']);
 
-Route::get('test/{name}/{id}', function($name, $id){
-    return 'the text is ' . $name . ' and id is ' . $id ;
-})->where('name','[a-zA-Z0-9]+')->whereNumber('id');
+Route::post('imageUpload',[ExampleController::class,'upload'])->name('imageUpload');
+
+Route::get('test', function(){
+    return view('test');
+});
+
+Route::get('image', function(){
+    return view('image');
+});
 
 
 // Routes for the car table

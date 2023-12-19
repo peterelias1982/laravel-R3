@@ -24,6 +24,15 @@
       <label for="description">description:</label>
       <textarea class="form-control" name="description" id="" cols="60" rows="3">{{ $car->description }}</textarea>
     </div>
+    <div class="form-group">
+      <label for="image">Image:</label>
+      <input type="file" class="form-control" id="image" name="image">
+      <br>
+      <img src="{{ asset('assets/images/1703013408.jpeg') }}" alt="car" style="width:200px;">
+      @error('image')
+        {{ $message }}
+      @enderror
+    </div>
     <div class="checkbox">
       <label><input type="checkbox" name="published" @checked($car->published)> Published me</label>
     </div>
