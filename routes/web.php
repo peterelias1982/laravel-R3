@@ -32,8 +32,16 @@ Route::get('aya',[ExampleController::class,'show']);
 Route::post('imageUpload',[ExampleController::class,'upload'])->name('imageUpload');
 
 Route::get('test', function(){
-    return view('test');
-});
+    return view('testHome');
+})->name('testHome');
+
+Route::get('404', function(){
+    return view('404');
+})->name('404');
+
+Route::get('contact', function(){
+    return view('contact');
+})->name('contact');
 
 Route::get('image', function(){
     return view('image');

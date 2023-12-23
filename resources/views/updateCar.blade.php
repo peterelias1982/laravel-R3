@@ -13,7 +13,7 @@
 
 <div class="container">
   <h2>Update data</h2>
-  <form action="{{ route('update', $car->id) }}" method="post">
+  <form action="{{ route('update', $car->id) }}" method="post" enctype="multipart/form-data">
     @csrf
     @method('put')
     <div class="form-group">
@@ -28,11 +28,12 @@
       <label for="image">Image:</label>
       <input type="file" class="form-control" id="image" name="image">
       <br>
-      <img src="{{ asset('assets/images/1703013408.jpeg') }}" alt="car" style="width:200px;">
+      <img src="{{ asset('assets/images/' . $car->image ) }}" alt="car" style="width:200px;">
       @error('image')
         {{ $message }}
       @enderror
     </div>
+    <input type="hidden" name="oldImage" value="{{ $car->image }}">
     <div class="checkbox">
       <label><input type="checkbox" name="published" @checked($car->published)> Published me</label>
     </div>
