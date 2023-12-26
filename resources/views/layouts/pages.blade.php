@@ -11,6 +11,8 @@
     @include('includes.header')
 	
     @yield('content')
+
+    @stack('row')
 		
     @include('includes.footer')
 
