@@ -36,13 +36,10 @@
     <div class="form-group">
       <label for="category">Category:</label>
       <select name="category_id" id="">
-      {{-- @foreach($categories as $category) --}}        
-          <option value="">Category</option>
-      {{-- @endforeach --}}
+      @foreach($categories as $category)        
+          <option value="{{ $category->id }}" @selected($category->id == $car->category_id) >{{ $category->cat_name }}</option>
+      @endforeach
       </select>
-      @error('category_id')
-        {{ $message }}
-      @enderror
     </div>
     <input type="hidden" name="oldImage" value="{{ $car->image }}">
     <div class="checkbox">

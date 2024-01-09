@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,17 +20,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('login', function () {
-    return view('login');
-});
+// Route::get('login', function () {
+//     return view('login');
+// });
 
-Route::post('logged', function () {
-    return 'You are logged in';
-})->name('logged');
+// Route::post('logged', function () {
+//     return 'You are logged in';
+// })->name('logged');
 
-Route::get('aya',[ExampleController::class,'show']);
+Route::get('test20',[ExampleController::class,'createSession']);
+Route::get('getSession',[Controller::class,'getSession']);
 
-Route::post('imageUpload',[ExampleController::class,'upload'])->name('imageUpload');
+// Route::post('imageUpload',[ExampleController::class,'upload'])->name('imageUpload');
 
 Route::get('test', function(){
     return view('testHome');
@@ -43,13 +45,13 @@ Route::get('contact', function(){
     return view('contact');
 })->name('contact');
 
-Route::get('image', function(){
-    return view('image');
-});
+// Route::get('image', function(){
+//     return view('image');
+// });
 
 
 // Routes for the car table
-Route::get('createCar',[CarController::class,'create'])->name('createCar');
+Route::get('createCar',[CarController::class,'create'])->middleware('verified')->name('createCar');
 Route::get('cars',[CarController::class,'index'])->name('cars');
 Route::get('updateCar/{id}',[CarController::class,'edit']);
 Route::get('showCar/{id}',[CarController::class,'show']);
@@ -59,3 +61,10 @@ Route::get('restoreCar/{id}',[CarController::class,'restore'])->name('restoreCar
 Route::get('forceDelete/{id}',[CarController::class,'forceDelete'])->name('forceDelete');
 Route::put('update/{id}',[CarController::class,'update'])->name('update');
 Route::post('storeCar',[CarController::class,'store'])->name('storeCar');
+Auth::routes(['verify'=>true]);
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('home', function(){
+    return view('home');
+});
