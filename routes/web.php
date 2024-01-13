@@ -29,6 +29,7 @@ Route::get('/', function () {
 // })->name('logged');
 
 Route::get('test20',[ExampleController::class,'createSession']);
+Route::post('sendContactUs',[ExampleController::class,'sendContactUs'])->name('sendContactUs');
 Route::get('getSession',[Controller::class,'getSession']);
 
 // Route::post('imageUpload',[ExampleController::class,'upload'])->name('imageUpload');
